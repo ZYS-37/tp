@@ -5,6 +5,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -122,6 +123,16 @@ public class JsonSerializableAddressBookTest {
         JsonSerializableAddressBook data = new JsonSerializableAddressBook(null, null, null);
 
         assertEquals(List.of(), data.toModelType().getStoryList());
+    }
+
+    @Test
+    public void toModelType_nullStory_throwsIllegalValueException() {
+        JsonSerializableAddressBook data = new JsonSerializableAddressBook(
+                null,
+                Collections.singletonList(null),
+                null);
+
+        assertThrows(IllegalValueException.class, "Invalid story.", data::toModelType);
     }
 
     @Test
